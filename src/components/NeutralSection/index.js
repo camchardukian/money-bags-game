@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CurrentPrize from "./CurrentPrize";
 import PrizesRemaining from "./PrizesRemaining";
-
 import "./styles.scss";
 
 const NeutralSection = ({ currentPrize, prizesRemaining }) => {
