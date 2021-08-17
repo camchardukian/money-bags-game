@@ -1,6 +1,7 @@
-.primary-section-container {
-    background-color: teal;
+.secondary-section-container {
+    background-color: tomato;
     padding: 36px 24px;
+    transform: rotate(180deg);
     .player-chips-container {
         display: flex;
         justify-content: center;
@@ -14,7 +15,6 @@
             align-items: center;
             justify-content: center;
             margin-left: 8px;
-            cursor: pointer;
         }
         .player-chip:first-of-type {
             margin-left: 0px;
