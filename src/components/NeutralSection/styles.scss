@@ -1,5 +1,48 @@
 .neutral-section-container {
-  .prizes-remaining-container {
-    display: flex;
-  }
+    .neutral-area-center-section {
+        display: flex;
+        align-items: center;
+        border: 1px solid purple;
+        .prizes-remaining-container {
+            display: flex;
+            flex-direction: column;
+            width: 140px;
+            margin-right: -140px;
+            border-right: 1px solid black;
+            .remaining-neutral-chips-list {
+                display: flex;
+                flex-wrap: wrap;
+                .remaining-neutral-chip-container {
+                    display: inline;
+                    margin-right: auto;
+                    padding-left: 8px;
+                }
+            }
+        }
+        .current-prize-container {
+            padding-top: 16px;
+            margin: 0 auto;
+            .current-prize-text {
+                margin-bottom: 8px;
+            }
+        }
+    }
+    .secondary-player-chip,
+    .neutral-chip,
+    .primary-player-chip {
+        border-radius: 50%;
+        border: 1px solid black;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 16px auto;
+    }
+    .primary-player-chip {
+        background-color: greenyellow;
+    }
+    .secondary-player-chip {
+        background-color: tomato;
+    }
 }
