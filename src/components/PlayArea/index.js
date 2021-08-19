@@ -10,7 +10,10 @@ const PlayArea = () => {
     const [isMovingToNextRound, setIsMovingToNextRound] = useState(true)
     const [primaryPlayerChips, setPrimaryPlayerChips] = useState([1, 2, 3, 4, 5, 6])
     const [secondaryPlayerChips, setSecondaryPlayerChips] = useState([1, 2, 3, 4, 5, 6])
-
+    const [activeChips, setActiveChips] = useState({
+        primaryPlayerChip: null,
+        secondaryPlayerChip: null,
+    })
     useEffect(() => {
         if (isMovingToNextRound) {
             const randomIndex = Math.floor(prizesRemaining.length * Math.random())
@@ -33,6 +36,12 @@ const PlayArea = () => {
                 return chip !== secondaryPlayerChips[randomIndex]
             })
         })
+        setActiveChips((prevState) => {
+            return {
+                ...prevState,
+                secondaryPlayerChip: secondaryPlayerChips[randomIndex],
+            }
+        })
         setIsMovingToNextRound(true)
     }
 
@@ -42,6 +51,12 @@ const PlayArea = () => {
                 return selectedChip !== chip
             })
         })
+        setActiveChips(() => {
+            return {
+                primaryPlayerChip: selectedChip,
+                secondaryPlayerChip: null,
+            }
+        })
         handleSelectSecondaryPlayerChip()
     }
     return (
@@ -50,6 +65,7 @@ const PlayArea = () => {
             <NeutralSection
                 currentPrize={currentPrize}
                 prizesRemaining={prizesRemaining}
+                activeChips={activeChips}
             />
             <PrimaryPlayerSection
                 chipsRemaining={primaryPlayerChips}
