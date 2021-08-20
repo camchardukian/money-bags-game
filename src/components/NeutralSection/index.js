@@ -1,11 +1,13 @@
 import React from 'react'
-import CurrentPrize from './CurrentPrize'
+import CurrentStatus from './CurrentStatus'
 import PrizesRemaining from './PrizesRemaining'
+import Scoreboard from '../Scoreboard'
+
 import './styles.scss'
 
-const NeutralSection = ({ currentPrize, prizesRemaining, activeChips }) => {
-    console.log('activeChips', activeChips)
+const NeutralSection = ({ currentPrize, prizesRemaining, activeChips, playerScores }) => {
     const { primaryPlayerChip, secondaryPlayerChip } = activeChips
+
     return (
         <div className="neutral-section-container">
             {secondaryPlayerChip && (
@@ -13,7 +15,8 @@ const NeutralSection = ({ currentPrize, prizesRemaining, activeChips }) => {
             )}
             <div className="neutral-area-center-section">
                 <PrizesRemaining prizesRemainingArray={prizesRemaining} />
-                <CurrentPrize prize={currentPrize} />
+                <CurrentStatus prize={currentPrize} />
+                <Scoreboard playerScores={playerScores} />
             </div>
             {primaryPlayerChip && (
                 <div className="primary-player-chip">{primaryPlayerChip}</div>

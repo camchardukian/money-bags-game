@@ -7,8 +7,15 @@
             display: flex;
             flex-direction: column;
             width: 140px;
+            height: 300px;
+            padding-top: 4px;
             margin-right: -140px;
             border-right: 1px solid black;
+            .prizes-remaining-title {
+                margin-top: 4px;
+                font-weight: bold;
+                font-size: 24px;
+            }
             .remaining-neutral-chips-list {
                 display: flex;
                 flex-wrap: wrap;
@@ -25,6 +32,10 @@
             .current-prize-text {
                 margin-bottom: 8px;
             }
+        }
+        .game-over-text {
+            font-size: 48px;
+            margin: 0 auto;
         }
     }
     .secondary-player-chip,
