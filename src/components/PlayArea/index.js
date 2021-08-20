@@ -14,11 +14,55 @@ const PlayArea = () => {
         primaryPlayerChip: null,
         secondaryPlayerChip: null,
     })
+    const [playerScores, setPlayerScores] = useState({
+        primaryPlayerScore: 0,
+        secondaryPlayerScore: 0,
+    })
+
+    useEffect(() => {
+        if (activeChips.primaryPlayerChip !== null) {
+            if (activeChips.primaryPlayerChip > activeChips.secondaryPlayerChip) {
+                setPlayerScores((prevState) => {
+                    return {
+                        ...prevState,
+                        primaryPlayerScore:
+                            prevState.primaryPlayerScore +
+                            activeChips.primaryPlayerChip +
+                            activeChips.secondaryPlayerChip +
+                            currentPrize,
+                    }
+                })
+                setCurrentPrize(0)
+            } else if (activeChips.primaryPlayerChip < activeChips.secondaryPlayerChip) {
+                setPlayerScores((prevState) => {
+                    return {
+                        ...prevState,
+                        secondaryPlayerScore:
+                            prevState.secondaryPlayerScore +
+                            activeChips.primaryPlayerChip +
+                            activeChips.secondaryPlayerChip +
+                            currentPrize,
+                    }
+                })
+                setCurrentPrize(0)
+            } else {
+                setCurrentPrize(() => {
+                    return (
+                        activeChips.primaryPlayerChip +
+                        activeChips.secondaryPlayerChip +
+                        currentPrize
+                    )
+                })
+            }
+            setActiveChips({ primaryPlayerChip: null, secondaryPlayerChip: null })
+        }
+    }, [activeChips, currentPrize])
+
     useEffect(() => {
         if (isMovingToNextRound) {
             const randomIndex = Math.floor(prizesRemaining.length * Math.random())
-            setCurrentPrize(() => {
-                return prizesRemaining[randomIndex]
+            setCurrentPrize((prevState) => {
+                return prevState + prizesRemaining[randomIndex]
             })
             setPrizesRemaining(() => {
                 return prizesRemaining.filter((prize) => {
@@ -27,8 +71,22 @@ const PlayArea = () => {
             })
             setIsMovingToNextRound(false)
         }
-    }, [isMovingToNextRound, prizesRemaining])
+    }, [currentPrize, isMovingToNextRound, prizesRemaining])
 
+    const handleSelectPrimaryPlayerChip = (selectedChip) => {
+        setPrimaryPlayerChips(() => {
+            return primaryPlayerChips.filter((chip) => {
+                return selectedChip !== chip
+            })
+        })
+        setActiveChips(() => {
+            return {
+                primaryPlayerChip: selectedChip,
+                secondaryPlayerChip: null,
+            }
+        })
+        handleSelectSecondaryPlayerChip()
+    }
     const handleSelectSecondaryPlayerChip = () => {
         const randomIndex = Math.floor(prizesRemaining.length * Math.random())
         setSecondaryPlayerChips(() => {
@@ -45,20 +103,6 @@ const PlayArea = () => {
         setIsMovingToNextRound(true)
     }
 
-    const handleSelectPrimaryPlayerChip = (selectedChip) => {
-        setPrimaryPlayerChips(() => {
-            return primaryPlayerChips.filter((chip) => {
-                return selectedChip !== chip
-            })
-        })
-        setActiveChips(() => {
-            return {
-                primaryPlayerChip: selectedChip,
-                secondaryPlayerChip: null,
-            }
-        })
-        handleSelectSecondaryPlayerChip()
-    }
     return (
         <div className="play-area-container">
             <SecondaryPlayerSection chipsRemaining={secondaryPlayerChips} />
@@ -66,6 +110,7 @@ const PlayArea = () => {
                 currentPrize={currentPrize}
                 prizesRemaining={prizesRemaining}
                 activeChips={activeChips}
+                playerScores={playerScores}
             />
             <PrimaryPlayerSection
                 chipsRemaining={primaryPlayerChips}

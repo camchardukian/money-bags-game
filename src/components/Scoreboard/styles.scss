@@ -1,0 +1,21 @@
+.scoreboard-container {
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+    height: 300px;
+    margin-left: -140px;
+    border-left: 1px solid black;
+    .scoreboard-title {
+        margin-bottom: 32px;
+    }
+    .scoreboard-title,
+    .primary-player-score,
+    .secondary-player-score {
+        font-weight: bold;
+        font-size: 24px;
+    }
+    .primary-player-score,
+    .secondary-player-score {
+        margin-top: 16px;
+    }
+}
