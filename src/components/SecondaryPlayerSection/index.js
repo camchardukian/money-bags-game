@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.scss'
 
-const SecondaryPlayerSection = ({ chipsRemaining = [], onSelectChip }) => {
+const SecondaryPlayerSection = ({ chipsRemaining = [] }) => {
     return (
         <div className="secondary-section-container">
             <div className="player-chips-container">
