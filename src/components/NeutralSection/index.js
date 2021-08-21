@@ -15,7 +15,11 @@ const NeutralSection = ({ currentPrize, prizesRemaining, activeChips, playerScor
             )}
             <div className="neutral-area-center-section">
                 <PrizesRemaining prizesRemainingArray={prizesRemaining} />
-                <CurrentStatus prize={currentPrize} />
+                <CurrentStatus
+                    prize={currentPrize}
+                    prizesRemaining={prizesRemaining}
+                    playerScores={playerScores}
+                />
                 <Scoreboard playerScores={playerScores} />
             </div>
             {primaryPlayerChip && (
